@@ -2,6 +2,14 @@ import {rest} from 'msw'
 import {v4} from 'uuid'
 import {getApiUrl} from '../components/api'
 
+export const getTasksError = rest.get(getApiUrl('/tasks'), (req, res, ctx) => {
+    return res(ctx.status(500), ctx.json({message: 'Internal server error'}))
+})
+
+export const updateTaskError = rest.post(getApiUrl('/task/:id'), (req, res, ctx) => {
+    return res(ctx.status(500), ctx.json({message: 'Something went wrong'}))
+})
+
 export const singleTask = rest.get(getApiUrl('/tasks'), (req, res, ctx) => {
     return res(
         ctx.json([
